@@ -1,55 +1,77 @@
 <!DOCTYPE html>
-<--!hello world-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soccer Leaderboard</title>
+    <title>Utilisation Leaderboard</title>
     <style>
         body {
-            background: url('https://source.unsplash.com/1600x900/?soccer-field') no-repeat center center fixed;
+            background: url('https://source.unsplash.com/1600x900/?grass,soccer-field') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
             text-align: center;
+            color: white;
         }
         .leaderboard {
-            width: 50%;
+            width: 60%;
             margin: auto;
             background: rgba(0, 0, 0, 0.8);
-            color: white;
             padding: 20px;
             border-radius: 10px;
             margin-top: 50px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
         }
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
         table {
             width: 100%;
             border-collapse: collapse;
         }
         th, td {
-            padding: 10px;
+            padding: 15px;
             border-bottom: 2px solid white;
+            font-size: 1.2em;
         }
         th {
             background: #ffcc00;
             color: black;
         }
-        .top-scorer {
-            color: #00ff00;
+        .gold {
+            background: gold;
+            color: black;
             font-weight: bold;
-            animation: flash 1s infinite alternate;
         }
-        @keyframes flash {
-            from { opacity: 1; }
-            to { opacity: 0.5; }
+        .silver {
+            background: silver;
+            color: black;
+            font-weight: bold;
+        }
+        .bronze {
+            background: #cd7f32;
+            color: black;
+            font-weight: bold;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: url('https://via.placeholder.com/40') no-repeat center;
+            background-size: cover;
+            display: inline-block;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="leaderboard">
-        <h1>Soccer Leaderboard</h1>
+        <h1>Utilisation Leaderboard</h1>
         <table>
             <thead>
                 <tr>
@@ -59,42 +81,58 @@
                 </tr>
             </thead>
             <tbody id="leaderboard-body">
-                <!-- Data will be inserted here -->
+                <tr class="gold">
+                    <td>1</td>
+                    <td><span class="profile-pic"></span>Sam</td>
+                    <td>98</td>
+                </tr>
+                <tr class="silver">
+                    <td>2</td>
+                    <td><span class="profile-pic"></span>Elise</td>
+                    <td>85</td>
+                </tr>
+                <tr class="bronze">
+                    <td>3</td>
+                    <td><span class="profile-pic"></span>Katie</td>
+                    <td>78</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><span class="profile-pic"></span>Irfan</td>
+                    <td>73</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><span class="profile-pic"></span>Prisca</td>
+                    <td>69</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><span class="profile-pic"></span>Emilee</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><span class="profile-pic"></span>Javier</td>
+                    <td>55</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><span class="profile-pic"></span>Aisha</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><span class="profile-pic"></span>Diego</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><span class="profile-pic"></span>Mei</td>
+                    <td>45</td>
+                </tr>
             </tbody>
         </table>
     </div>
-    
-    <script>
-        async function fetchLeaderboard() {
-            const siteUrl = "https://tetratechinc.sharepoint.com/teams/UtilisationLeaderboard";
-            const listName = "Leaderboard";
-            const apiUrl = `${siteUrl}/_api/web/lists/getbytitle('${listName}')/items?$orderby=Score desc`;
-            
-            const response = await fetch(apiUrl, {
-                headers: {
-                    "Accept": "application/json;odata=verbose"
-                }
-            });
-            
-            const data = await response.json();
-            const items = data.d.results;
-            
-            const tbody = document.getElementById("leaderboard-body");
-            tbody.innerHTML = "";
-            
-            items.forEach((item, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td class="${index === 0 ? 'top-scorer' : ''}">${item.Name}</td>
-                    <td>${item.Score}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-        
-        fetchLeaderboard();
-        setInterval(fetchLeaderboard, 30000); // Refresh leaderboard every 30 seconds
-    </script>
 </body>
 </html>
