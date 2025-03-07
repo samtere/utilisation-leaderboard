@@ -6,7 +6,7 @@
     <title>Utilisation Leaderboard</title>
     <style>
         body {
-            background: url('https://source.unsplash.com/1600x900/?grass,soccer-field') no-repeat center center fixed;
+            background: url('https://previews.123rf.com/images/phanthit/phanthit1709/phanthit170900026/85312750-artificial-green-grass-texture-for-golf-course-soccer-field-or-sports-background-concept-design.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -15,16 +15,17 @@
         .leaderboard {
             width: 60%;
             margin: auto;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             margin-top: 50px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 77, 0, 0.8);
         }
         h1 {
             font-size: 2.5em;
             text-transform: uppercase;
-            animation: pulse 1.5s infinite alternate;
+            
+            color: #004d00;
         }
         @keyframes pulse {
             from { transform: scale(1); }
@@ -36,20 +37,31 @@
         }
         th, td {
             padding: 15px;
-            border-bottom: 2px solid white;
+            border-bottom: 2px solid #004d00;
             font-size: 1.2em;
         }
         th {
-            background: #ffcc00;
-            color: black;
+            background: #008000;
+            color: white;
+        }
+        td {
+            text-align: center;
+        }
+        .score {
+            text-align: center;
         }
         .gold {
-            background: gold;
+            background: #d4af37;
             color: black;
             font-weight: bold;
+            
+        }
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
         }
         .silver {
-            background: silver;
+            background: #c0c0c0;
             color: black;
             font-weight: bold;
         }
@@ -62,10 +74,17 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: url('https://via.placeholder.com/40') no-repeat center;
-            background-size: cover;
             display: inline-block;
             margin-right: 10px;
+            vertical-align: middle;
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            right: 20px;
+            font-size: 1em;
+            color: #004d00;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -77,62 +96,63 @@
                 <tr>
                     <th>Rank</th>
                     <th>Player</th>
-                    <th>Score</th>
+                    <th>Utilisation (%)</th>
                 </tr>
             </thead>
             <tbody id="leaderboard-body">
                 <tr class="gold">
                     <td>1</td>
-                    <td><span class="profile-pic"></span>Sam</td>
-                    <td>98</td>
+                    <td><img class="profile-pic" src="https://media.licdn.com/dms/image/v2/C5603AQGonqiI07mAFQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1657717996332?e=2147483647&v=beta&t=0nEIcOSpJs4aex6v1WTG7EXrRPGWx4CedQ7Fxlg3u0I"> Sam</td>
+                    <td class="score">98%</td>
                 </tr>
                 <tr class="silver">
                     <td>2</td>
-                    <td><span class="profile-pic"></span>Elise</td>
-                    <td>85</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Elise</td>
+                    <td class="score">85%</td>
                 </tr>
                 <tr class="bronze">
                     <td>3</td>
-                    <td><span class="profile-pic"></span>Katie</td>
-                    <td>78</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Katie</td>
+                    <td class="score">78%</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td><span class="profile-pic"></span>Irfan</td>
-                    <td>73</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Irfan</td>
+                    <td class="score">73%</td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td><span class="profile-pic"></span>Prisca</td>
-                    <td>69</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Prisca</td>
+                    <td class="score">69%</td>
                 </tr>
                 <tr>
                     <td>6</td>
-                    <td><span class="profile-pic"></span>Emilee</td>
-                    <td>60</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Emilee</td>
+                    <td class="score">60%</td>
                 </tr>
                 <tr>
                     <td>7</td>
-                    <td><span class="profile-pic"></span>Javier</td>
-                    <td>55</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Javier</td>
+                    <td class="score">55%</td>
                 </tr>
                 <tr>
                     <td>8</td>
-                    <td><span class="profile-pic"></span>Aisha</td>
-                    <td>50</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Aisha</td>
+                    <td class="score">50%</td>
                 </tr>
                 <tr>
                     <td>9</td>
-                    <td><span class="profile-pic"></span>Diego</td>
-                    <td>48</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Diego</td>
+                    <td class="score">48%</td>
                 </tr>
                 <tr>
                     <td>10</td>
-                    <td><span class="profile-pic"></span>Mei</td>
-                    <td>45</td>
+                    <td><img class="profile-pic" src="https://via.placeholder.com/40"> Mei</td>
+                    <td class="score">45%</td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="footer">Made with ♥️ in Seoul</div>
 </body>
 </html>
