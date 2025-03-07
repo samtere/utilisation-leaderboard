@@ -1,1 +1,99 @@
-"" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Leaderboard</title>
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1600x900/?soccer-field') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .leaderboard {
+            width: 50%;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 2px solid white;
+        }
+        th {
+            background: #ffcc00;
+            color: black;
+        }
+        .top-scorer {
+            color: #00ff00;
+            font-weight: bold;
+            animation: flash 1s infinite alternate;
+        }
+        @keyframes flash {
+            from { opacity: 1; }
+            to { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaderboard">
+        <h1>Soccer Leaderboard</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- Data will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        async function fetchLeaderboard() {
+            const siteUrl = "https://tetratechinc.sharepoint.com/teams/UtilisationLeaderboard";
+            const listName = "Leaderboard";
+            const apiUrl = `${siteUrl}/_api/web/lists/getbytitle('${listName}')/items?$orderby=Score desc`;
+            
+            const response = await fetch(apiUrl, {
+                headers: {
+                    "Accept": "application/json;odata=verbose"
+                }
+            });
+            
+            const data = await response.json();
+            const items = data.d.results;
+            
+            const tbody = document.getElementById("leaderboard-body");
+            tbody.innerHTML = "";
+            
+            items.forEach((item, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td class="${index === 0 ? 'top-scorer' : ''}">${item.Name}</td>
+                    <td>${item.Score}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        fetchLeaderboard();
+        setInterval(fetchLeaderboard, 30000); // Refresh leaderboard every 30 seconds
+    </script>
+</body>
+</html>
